@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# 設定 Streamlit 中文字型
+# 讓 Streamlit 介面中文字正常
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
-    html, body, [class*="css"]  {
-        font-family: 'Noto Sans TC', sans-serif;
+    html, body, .main, .css-1v3fvcr, .css-12oz5g7 {
+        font-family: 'Noto Sans TC', sans-serif !important;
     }
     </style>
     """,
