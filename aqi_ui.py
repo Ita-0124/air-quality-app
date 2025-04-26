@@ -2,6 +2,20 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# 設定 Streamlit 中文字型
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+
+    html, body, [class*="css"]  {
+        font-family: 'Noto Sans TC', sans-serif;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # 設定中文字型
 plt.rcParams['font.family'] = 'Microsoft JhengHei'
 
