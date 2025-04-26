@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import base64
 
 # 把 ttf 字型讀進來，轉 base64
 with open("NotoSansTC-Regular.ttf", "rb") as f:
