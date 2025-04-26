@@ -2,22 +2,29 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# 讓 Streamlit 介面中文字正常
-st.markdown(
-    """
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+# 把 ttf 字型讀進來，轉 base64
+with open("NotoSansTC-Regular.ttf", "rb") as f:
+    font_data = f.read()
+base64_font = base64.b64encode(font_data).decode('utf-8')
 
-    html, body, .main, .css-1v3fvcr, .css-12oz5g7 {
-        font-family: 'Noto Sans TC', sans-serif !important;
-    }
+# 注入 CSS
+st.markdown(
+    f"""
+    <style>
+    @font-face {{
+        font-family: 'CustomFont';
+        src: url(data:font/ttf;base64,{base64_font}) format('truetype');
+    }}
+    html, body, .main, .css-1v3fvcr, .css-12oz5g7 {{
+        font-family: 'CustomFont', sans-serif !important;
+    }}
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# 設定中文字型
-plt.rcParams['font.family'] = 'Microsoft JhengHei'
+# Matplotlib 也設定字型
+plt.rcParams['font.family'] = 'Noto Sans TC'
 
 # 讀取CSV
 df = pd.read_csv("歷史空氣品質.csv")
