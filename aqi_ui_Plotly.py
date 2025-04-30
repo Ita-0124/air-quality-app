@@ -21,11 +21,24 @@ def get_air_quality_data():
     # 歷史空氣品質資料
     history_url = 'https://data.moenv.gov.tw/api/v2/aqx_p_488?api_key=9b651a1b-0732-418e-b4e9-e784417cadef&limit=1000&sort=datacreationdate desc&format=JSON'
 
-    cur_res = requests.get(current_url).json()
-    his_res = requests.get(history_url).json()
+    try:
+        cur_res = requests.get(current_url)
+        cur_res.raise_for_status()  # 如果回應的狀態碼不是 200，會觸發異常
+        cur_res_json = cur_res.json()
+    except requests.exceptions.RequestException as e:
+        st.error(f"無法獲取當前空氣品質資料: {e}")
+        return pd.DataFrame(), pd.DataFrame()
 
-    current_df = pd.DataFrame(cur_res['records'])
-    history_df = pd.DataFrame(his_res['records'])
+    try:
+        his_res = requests.get(history_url)
+        his_res.raise_for_status()
+        his_res_json = his_res.json()
+    except requests.exceptions.RequestException as e:
+        st.error(f"無法獲取歷史空氣品質資料: {e}")
+        return pd.DataFrame(), pd.DataFrame()
+
+    current_df = pd.DataFrame(cur_res_json['records'])
+    history_df = pd.DataFrame(his_res_json['records'])
 
     # 格式化欄位
     for df in [current_df, history_df]:
