@@ -17,7 +17,7 @@ st.title('🌫️ 台灣空氣品質儀表板')
 @st.cache_data(ttl=3600)
 def get_air_quality_data():
     # 最新空氣品質資料
-    current_url = 'https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=9e565f9a-84dd-4e79-9097-d403cae1ea75&limit=1000&sort=ImportDate desc&format=JSON'
+    current_url = 'https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate desc&format=JSON'
     # 歷史空氣品質資料
     history_url = 'https://data.moenv.gov.tw/api/v2/aqx_p_488?api_key=9b651a1b-0732-418e-b4e9-e784417cadef&limit=1000&sort=datacreationdate desc&format=JSON'
 
